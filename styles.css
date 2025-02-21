@@ -5,6 +5,20 @@
     height: 75vh;
 }
 
+#historyBox {
+    height: 600px;
+    width: 300px;
+    border: 1px black solid;
+    text-align: center;
+}
+
+
+
+#historyBox h3 {
+    text-align: center;
+    text-decoration: underline;
+}
+
 #contentBox {
     display: flex;
     flex-direction: column;

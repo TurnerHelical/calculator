@@ -10,6 +10,7 @@
 // set up event delegation to only perform the action of the button clicked
 const buttonContainer = document.querySelector('#buttonContainer');
 const display = document.querySelector('#display');
+const history = document.querySelector('#historyText');
 
 let displayArray = [];
 let currentNumber = '';
@@ -23,9 +24,24 @@ function equate(e) {
         currentNumber = '';
         display.textContent = '';
         displayArray = [];
+        history.textContent = '';
+
     } else if (pushed == '+' || pushed == '-' || pushed == 'x' || pushed == '/' ) {
         // function should push the currentDisplay variable and the operator pushed into an array
         // reset currentNumber to '' but keep display.textContent the same
+        if (currentNumber == '') {
+            return false
+        } else {
+            displayArray.push(display.textContent, pushed);
+            const historyNumber = document.createElement('p');
+            historyNumber.textContent = `${currentNumber}`;
+            history.appendChild(historyNumber);
+            const historyOperator = document.createElement('p');
+            historyOperator.textContent = `${pushed}`;
+            history.appendChild(historyOperator);
+            display.textContent = '';
+            currentNumber = '';
+        }
     } else {
         if (displayArray.length > 9){
             display.textContent = 'ERROR';
