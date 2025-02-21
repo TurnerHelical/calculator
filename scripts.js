@@ -38,7 +38,7 @@ function equate(e) {
             return false;
         } else {
             display.textContent += `${pushed}`;
-            currentNumber = currentNumber.concat(`${pushed}`);
+            currentNumber += pushed;
             console.log(currentNumber);
         }
     }
