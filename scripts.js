@@ -12,144 +12,37 @@ const buttonContainer = document.querySelector('#buttonContainer');
 const display = document.querySelector('#display');
 
 let displayArray = [];
-
+let currentNumber = '';
 // write a function to change the display of the calculator and when an operator is selected push the current 
 // display into an array along with the operator pushed
 function equate(e) {
-    let currentDisplay = '';
+    
     let length = display.textContent.length;
-    let number = e.target.textContent
-    if (number == 'C') {
-        currentDisplay = '';
+    let pushed = e.target.textContent;
+    if (pushed == 'C') {
+        currentNumber = '';
         display.textContent = '';
         displayArray = [];
-    }
-    else {
+    } else if (pushed == '+' || pushed == '-' || pushed == 'x' || pushed == '/' ) {
+        // function should push the currentDisplay variable and the operator pushed into an array
+        // reset currentNumber to '' but keep display.textContent the same
+    } else {
         if (displayArray.length > 9){
-            display.textContent = 'ERROR'
-        } else if (length > 10) {
-            display.textContent = 'OVER MAX CHARS'
+            display.textContent = 'ERROR';
+        } else if (length >= 18) {
+            display.textContent = 'OVER MAX CHARS';
          
         } else if (isNaN(display.textContent) == true) {
-            display.textContent = 'ERROR'
-        
+            display.textContent = 'ERROR';
+        } else if (pushed.length > 1) {
+            return false;
         } else {
-            display.textContent += `${number}`;
-            currentDisplay = display.textContent;
-            console.log(currentDisplay);
+            display.textContent += `${pushed}`;
+            currentNumber = currentNumber.concat(`${pushed}`);
+            console.log(currentNumber);
         }
     }
-    // } else if(e.target.matches('#2')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#3')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#4')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#5')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#6')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#7')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#8')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#9')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#0')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#decimal')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // } else if (e.target.matches('#clear')) {
-    //     if (displayArray.length > 9){
-    //         display.textContent = 'ERROR'
-    //     } else if (length > 10) {
-    //         display.textContent = 'OVER MAX CHARS'
-    //     } else {
-    //         display.textContent += '1';
-    //         currentDisplay = display.textContent;
-    //         console.log(currentDisplay);
-    //     }
-    // }
+   
 }
 
 buttonContainer.addEventListener('click', equate)
