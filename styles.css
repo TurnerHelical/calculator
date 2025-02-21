@@ -18,9 +18,10 @@
 
 }
 
-#answer {
+#display {
     text-align: end;
     width: 75%;
+    height: 10%;
     margin-top: 15px;
     border: 1px solid black;
     font-size: 32px;
