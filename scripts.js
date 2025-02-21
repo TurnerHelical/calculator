@@ -26,6 +26,29 @@ function equate(e) {
         displayArray = [];
         history.textContent = '';
 
+    } else if(pushed == '=') {
+        displayArray.push(display.textContent, pushed);
+        displayArray.splice(-1,1);
+        console.log(displayArray);
+        for (char of displayArray) {
+            let operator = displayArray.find((element) => element == 'x' | element == '/');
+            let index = displayArray.findIndex((element) => element == 'x' || element == '/');
+                if (operator == 'x') {
+                    firstNumber = displayArray[index - 1];
+                    secondNumber = displayArray[index + 1];
+                    let answer = firstNumber * secondNumber;
+                    console.log(answer);
+                    displayArray.splice(firstNumber, 3, answer);
+                } else if (operator == '/') {
+                    firstNumber = displayArray[index - 1];
+                    secondNumber = displayArray[index + 1];
+                    console.log(firstNumber);
+                    console.log(secondNumber);
+                    let answer = firstNumber / secondNumber;
+                    console.log(answer);
+                    displayArray.splice(firstNumber, 3, answer);
+                }
+        }
     } else if (pushed == '+' || pushed == '-' || pushed == 'x' || pushed == '/' ) {
         // function should push the currentDisplay variable and the operator pushed into an array
         // reset currentNumber to '' but keep display.textContent the same
@@ -43,7 +66,7 @@ function equate(e) {
             currentNumber = '';
         }
     } else {
-        if (displayArray.length > 9){
+        if (displayArray.length > 12){
             display.textContent = 'ERROR';
         } else if (length >= 18) {
             display.textContent = 'OVER MAX CHARS';
