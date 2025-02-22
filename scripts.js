@@ -29,25 +29,37 @@ function equate(e) {
     } else if(pushed == '=') {
         displayArray.push(display.textContent, pushed);
         displayArray.splice(-1,1);
-        console.log(displayArray);
+        const historyNumber = document.createElement('p');
+        historyNumber.textContent = `${currentNumber}`;
+        history.appendChild(historyNumber);
         for (char of displayArray) {
-            let operator = displayArray.find((element) => element == 'x' | element == '/');
-            let index = displayArray.findIndex((element) => element == 'x' || element == '/');
-                if (operator == 'x') {
-                    firstNumber = displayArray[index - 1];
-                    secondNumber = displayArray[index + 1];
+            let multiplyOrDivide = displayArray.find((element) => element == 'x' || element == '/');
+            let addOrSubtract = displayArray.find((element) => element == '+' || element == '-');
+            let indexFirst = displayArray.findIndex((element) => element == 'x' || element == '/');
+            let indexSecond = displayArray.findIndex((element) => element == '+' || element == '-');
+             if (multiplyOrDivide == 'x') {
+                    firstNumber = displayArray[indexFirst - 1];
+                    secondNumber = displayArray[indexFirst + 1];
                     let answer = firstNumber * secondNumber;
-                    console.log(answer);
-                    displayArray.splice(firstNumber, 3, answer);
-                } else if (operator == '/') {
-                    firstNumber = displayArray[index - 1];
-                    secondNumber = displayArray[index + 1];
-                    console.log(firstNumber);
-                    console.log(secondNumber);
+                    displayArray.splice((indexFirst - 1), 3, answer);
+                } else if (multiplyOrDivide == '/') {
+                    firstNumber = displayArray[indexFirst - 1];
+                    secondNumber = displayArray[indexFirst + 1];
                     let answer = firstNumber / secondNumber;
-                    console.log(answer);
-                    displayArray.splice(firstNumber, 3, answer);
-                }
+                    displayArray.splice((indexFirst - 1), 3, answer);
+                } else if (addOrSubtract == '+') {
+                    firstNumber = displayArray[indexSecond - 1];
+                    secondNumber = displayArray[indexSecond + 1];
+                    let answer = +firstNumber + +secondNumber;
+                    displayArray.splice((indexSecond - 1), 3, answer);
+                } else if (addOrSubtract == '-') {
+                    firstNumber = displayArray[indexSecond - 1];
+                    secondNumber = displayArray[indexSecond + 1];
+                    let answer = firstNumber - secondNumber;
+                    displayArray.splice((indexSecond - 1), 3, answer);
+                } 
+
+            display.textContent = displayArray[0];
         }
     } else if (pushed == '+' || pushed == '-' || pushed == 'x' || pushed == '/' ) {
         // function should push the currentDisplay variable and the operator pushed into an array
@@ -78,52 +90,9 @@ function equate(e) {
         } else {
             display.textContent += `${pushed}`;
             currentNumber += pushed;
-            console.log(currentNumber);
         }
     }
    
 }
 
-buttonContainer.addEventListener('click', equate)
-
-function add(number1,...numbers) {
-    let answer = number1;
-    for (num of numbers) {
-        answer += num;
-    }
-    return answer
-}
-
-function subtract(number1,...numbers) {
-    let answer = number1;
-    for (num of numbers) {
-        answer -= num;
-    }
-    return answer;
-}
-
-function multiply(number1,...numbers) {
-    let answer = number1;
-    for (num of numbers) {
-        answer *= num;
-    }
-    return answer;
-}
-
-
-function divide(number1,...numbers) {
-    let answer = number1;
-    for (num of numbers) {
-        answer /= num;
-    }
-    let twoDecimals = answer.toFixed(2);
-    let finalAnswer = Number(twoDecimals);
-    return finalAnswer;
-}
-
-let total1 = add(1,2,3,4,5);
-let total2 = subtract(10,5,2);
-let total3 = multiply(2,2,2);
-let total4 = divide(10,2,3);
-
-console.log(total1,total2,total3,total4);
+buttonContainer.addEventListener('click', equate);
